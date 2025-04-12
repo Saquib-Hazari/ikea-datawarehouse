@@ -1,0 +1,13 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "ikea_database",
+      "database": "ikea_sales_database",
+      "username": "saquibhazari"
+    }
+  ]
+}
