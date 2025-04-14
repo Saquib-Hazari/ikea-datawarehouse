@@ -15,9 +15,9 @@ conn = psycopg2.connect(
 )
 
 queries = {
-  "dim_customers" : "SELECT * FROM gold.dim_customers",
-  "dim_products" : "SELECT * FROM gold.dim_products",
-  "fact_sales": "SELECT * FROM gold.fact_sales"
+  "dim_customers" : "SELECT * FROM gold.dim_customers LIMIT 5000",
+  "dim_products" : "SELECT * FROM gold.dim_products LIMIT 5000",
+  "fact_sales": "SELECT * FROM gold.fact_sales LIMIT 5000"
 }
 
 for name, query in queries.items():
