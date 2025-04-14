@@ -1,94 +1,77 @@
--- Creating data cleansing and data preparation
-SELECT customer_id,
-  INITCAP(TRIM(name)) AS full_name,
-  CASE 
-    WHEN UPPER(TRIM(gender)) = 'M' OR LOWER(TRIM(gender)) = 'm' THEN 'Male'  
-    WHEN UPPER(TRIM(gender)) = 'F' OR LOWER(TRIM(gender)) = 'f' THEN 'Female'
-    ELSE 'n/a' 
-  END AS gender,
-    CASE
-    WHEN dob ~ '^[A-Za-z]+ [0-9]{1,2}, [0-9]{4}$' THEN TO_DATE(dob, 'Month DD, YYYY')  -- March 12, 2004
-    WHEN dob ~ '^[0-9]{4}/[0-9]{2}/[0-9]{2}$' THEN TO_DATE(dob, 'YYYY/MM/DD')         -- 1989/12/15
-    WHEN dob ~ '^[0-9]{2}-[0-9]{2}-[0-9]{4}$' THEN TO_DATE(dob, 'DD-MM-YYYY')         -- 12-10-1996
-    WHEN dob ~ '^[0-9]{2}/[0-9]{2}/[0-9]{2}$' THEN TO_DATE(dob, 'DD/MM/YY')           -- 20/05/99
-    WHEN dob ~ '^[0-9]{2}/[0-9]{2}/[0-9]{4}$' THEN TO_DATE(dob, 'DD/MM/YYYY')         -- fallback
-    ELSE NULL
-  END AS date_of_birth,
-  TRIM(state) AS state,
-  TRIM(city) AS city,
-  TRIM(country) AS country,
-  CASE 
-    WHEN UPPER(TRIM(category)) LIKE 'OUTDOOR%' THEN 'Outdoor'
-    WHEN UPPER(TRIM(category)) LIKE 'OFFICE%' THEN 'Office'
-    WHEN UPPER(TRIM(category)) LIKE 'KITCHEN%' THEN 'Kitchen'
-    WHEN UPPER(TRIM(category)) LIKE 'HOME%' THEN 'Home'
-    ELSE 'Unknown'
-  END AS clean_category,
-  CASE 
-    WHEN LOWER(subcategory) LIKE '%bed%' THEN 'Bed'
-    WHEN LOWER(subcategory) LIKE '%desk%' THEN 'Desk'
-    WHEN LOWER(subcategory) LIKE '%chair%' THEN 'Chair'
-    WHEN LOWER(subcategory) LIKE '%lamp%' THEN 'Lamp'
-    WHEN LOWER(subcategory) LIKE '%sofa%' THEN 'Sofa'
-    WHEN LOWER(subcategory) LIKE '%table%' THEN 'Table'
-    ELSE 'Unknown'
-  END AS sub_category
-FROM bronze.customers
-
-SELECT full_name
-FROM(
-SELECT
-  INITCAP(TRIM(name)) AS full_name
-FROM bronze.customers
-)t 
-WHERE full_name IS NULL
+-- creating order_items cleansing analysis
+SELECT 
+  order_item_id,
+  order_id,
+  product_id,
+  INITCAP(TRIM(item_name)) AS product_name,
+  ABS(quantity::NUMERIC) AS quantity,
+  price,
+  ABS(item_total::NUMERIC) AS told
+FROM order_items
+LIMIT 100
 
 SELECT 
   CASE 
-    WHEN UPPER(TRIM(gender)) = 'M' OR LOWER(TRIM(gender)) = 'm' THEN 'Male'  
-    WHEN UPPER(TRIM(gender)) = 'F' OR LOWER(TRIM(gender)) = 'f' THEN 'Female'
-    ELSE 'n/a' 
-  END AS gender
-FROM bronze.customers
-WHERE gender IS NOT NULL
+    WHEN quantity::NUMERIC < 0 THEN ABS(quantity::NUMERIC)
+    ELSE  quantity::NUMERIC(10,1)
+  END AS quantity
+FROM order_items;
 
-SELECT 
-  CASE
-    WHEN dob ~ '^[A-Za-z]+ [0-9]{1,2}, [0-9]{4}$' THEN TO_DATE(dob, 'Month DD, YYYY')  -- March 12, 2004
-    WHEN dob ~ '^[0-9]{4}/[0-9]{2}/[0-9]{2}$' THEN TO_DATE(dob, 'YYYY/MM/DD')         -- 1989/12/15
-    WHEN dob ~ '^[0-9]{2}-[0-9]{2}-[0-9]{4}$' THEN TO_DATE(dob, 'DD-MM-YYYY')         -- 12-10-1996
-    WHEN dob ~ '^[0-9]{2}/[0-9]{2}/[0-9]{2}$' THEN TO_DATE(dob, 'DD/MM/YY')           -- 20/05/99
-    WHEN dob ~ '^[0-9]{2}/[0-9]{2}/[0-9]{4}$' THEN TO_DATE(dob, 'DD/MM/YYYY')         -- fallback
-    ELSE NULL
-  END AS date_of_birth
-FROM bronze.customers
+SELECT ABS(item_total::NUMERIC) AS told
+FROM order_items
 
-
-SELECT 
+SELECT product_id::INTEGER,
+  INITCAP(TRIM(product_name)) AS product_names,
   CASE 
-    WHEN UPPER(TRIM(category)) LIKE 'OUTDOOR%' THEN 'Outdoor'
-    WHEN UPPER(TRIM(category)) LIKE 'OFFICE%' THEN 'Office'
-    WHEN UPPER(TRIM(category)) LIKE 'KITCHEN%' THEN 'Kitchen'
-    WHEN UPPER(TRIM(category)) LIKE 'HOME%' THEN 'Home'
-    ELSE 'Unknown'
-  END AS clean_category
-FROM bronze.customers;
-
-UPDATE bronze.customers
-SET country = 
+        WHEN LOWER(category) ~ 'outdoor' THEN 'Outdoor'
+        WHEN LOWER(category) ~ 'kitchen' THEN 'Kitchen'
+        WHEN LOWER(category) ~ 'office' THEN 'Office'
+        WHEN LOWER(category) ~ 'home' THEN 'Home'
+        ELSE 'Unknown'
+    END AS category,
   CASE 
-    WHEN LOWER(TRIM(country)) = 'india' OR UPPER(TRIM(country))= 'INDIA' OR country = 'indai' OR country = 'INDAI' THEN 'India'
-    ELSE 'India'
-  END;
+    WHEN LOWER(sub_category) ~ 'chair|cjair' THEN 'Chair'
+    WHEN LOWER(sub_category) ~ 'lamp|iamp' THEN 'Lamp'
+    WHEN LOWER(sub_category) ~ 'desk|djsk' THEN 'Desk'
+    WHEN LOWER(sub_category) ~ 'sofa|swfa|sbfa' THEN 'Sofa'
+    WHEN LOWER(sub_category) ~ 'table' THEN 'Table'
+    WHEN LOWER(sub_category) ~ 'bed' THEN 'Bed'
+    ELSE 'Unknown' 
+END AS sub_category,
+  INITCAP(TRIM(REPLACE (supplier_name, '-', ' '))) AS supplier_name,
+  CASE 
+    WHEN defect_flag = 'N' THEN 'No'  
+    WHEN defect_flag = 'Y' THEN 'Yes'  
+    WHEN defect_flag = '1' THEN 'Yes'
+    WHEN defect_flag = '0' THEN 'No'
+    ELSE  'Unknown'
+  END AS defect_flag
+FROM products
 
+SELECT  sub_category,
+  ROW_NUMBER() OVER() AS row_number
+FROM (
+SELECT 
+   CASE 
+    WHEN LOWER(sub_category) ~ 'chair|cjair' THEN 'Chair'
+    WHEN LOWER(sub_category) ~ 'lamp|iamp' THEN 'Lamp'
+    WHEN LOWER(sub_category) ~ 'desk|djsk' THEN 'Desk'
+    WHEN LOWER(sub_category) ~ 'sofa|swfa|sbfa' THEN 'Sofa'
+    WHEN LOWER(sub_category) ~ 'table' THEN 'Table'
+    WHEN LOWER(sub_category) ~ 'bed' THEN 'Bed'
+    ELSE 'Unknown' 
+END AS sub_category
+FROM products
+)t
 
 SELECT CASE 
-    WHEN LOWER(subcategory) LIKE '%bed%' THEN 'Bed'
-    WHEN LOWER(subcategory) LIKE '%desk%' THEN 'Desk'
-    WHEN LOWER(subcategory) LIKE '%chair%' THEN 'Chair'
-    WHEN LOWER(subcategory) LIKE '%lamp%' THEN 'Lamp'
-    WHEN LOWER(subcategory) LIKE '%sofa%' THEN 'Sofa'
-    WHEN LOWER(subcategory) LIKE '%table%' THEN 'Table'
-    ELSE 'Unknown'
-  END AS cleaned_product
-FROM bronze.customers
+  WHEN defect_flag = 'N' THEN 'No'  
+  WHEN defect_flag = 'Y' THEN 'Yes'  
+  WHEN defect_flag = '1' THEN 'Yes'
+  WHEN defect_flag = '0' THEN 'No'
+  ELSE  'Unknown'
+END AS defect_flag
+FROM products
+
+SELECT INITCAP(TRIM(REPLACE (supplier_name, '-', ' '))) AS supplier_name
+FROM products
