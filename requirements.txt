@@ -1,0 +1,5 @@
+# Python libraries
+pandas
+numpy
+psycopg2
+python-dotenv

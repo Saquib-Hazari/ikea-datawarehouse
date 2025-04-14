@@ -7,8 +7,8 @@ CREATE TABLE bronze.customers(
   name TEXT,
   gender TEXT,
   dob TEXT,
-  state TEXT,
   city TEXT,
+  state TEXT,
   country TEXT, 
   category TEXT,
   subcategory TEXT

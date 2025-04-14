@@ -71,3 +71,25 @@ CREATE TABLE bronze.sales(
   net_sales TEXT
 )
 
+
+UPDATE bronze.customers
+SET state = CASE 
+    WHEN LOWER(city) = 'new delhi' THEN 'Delhi'
+    WHEN LOWER(city) = 'hyderabad' THEN 'Telangana'
+    WHEN LOWER(city) = 'chennai' THEN 'Tamil Nadu'
+    WHEN LOWER(city) = 'mumbai' THEN 'Maharashtra'
+    WHEN LOWER(city) = 'bengaluru' THEN 'Karnataka'
+    ELSE state  -- retain original if no match
+END;
+
+SELECT 
+    city,
+    CASE 
+        WHEN LOWER(city) = 'new delhi' THEN 'Delhi'
+        WHEN LOWER(city) = 'hyderabad' THEN 'Telangana'
+        WHEN LOWER(city) = 'chennai' THEN 'Tamil Nadu'
+        WHEN LOWER(city) = 'mumbai' THEN 'Maharashtra'
+        WHEN LOWER(city) = 'bengaluru' THEN 'Karnataka'
+        ELSE 'Unknown'
+    END AS state
+FROM bronze.customers;
