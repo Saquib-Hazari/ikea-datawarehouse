@@ -23,3 +23,7 @@ SELECT
   END AS cleaned_order_status
 FROM orders
 LIMIT 100
+
+SELECT *
+FROM gold.dim_customers
+LIMIT 100

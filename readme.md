@@ -1,4 +1,8 @@
-# 🏠 <u>Data Warehouse: Ikea</u>
+**🛠️ Skills & Technologies Used**
+
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white) ![SQL](https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=sqlite&logoColor=white) ![ETL](https://img.shields.io/badge/ETL%20Pipeline-blueviolet?style=for-the-badge) ![Data Warehousing](https://img.shields.io/badge/Data%20Warehousing-orange?style=for-the-badge) ![Data Modeling](https://img.shields.io/badge/Star%20Schema-29ABE2?style=for-the-badge) ![CSV Processing](https://img.shields.io/badge/CSV%20Handling-green?style=for-the-badge) ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Version Control](https://img.shields.io/badge/Version%20Control-6DB33F?style=for-the-badge&logo=git)
+
+# 🏠 <u>Ikea Data Warehouse</u>
 
 This repository showcases a comprehensive data warehousing and analytics solution, covering the end-to-end data pipeline—from data ingestion and transformation to business intelligence and insights generation.
 
@@ -10,7 +14,7 @@ Designed as a portfolio project, it demonstrates industry best practices in data
 
 Basic Data Architect used for this project to build Bronze, Silver, and Gold layers.
 
-![Data Architect](images/Architect.png)
+![Data Architect](./assets/images/Architecture.png)
 
 1. **Bronze Layer**: The raw data storage layer, where data is ingested directly from source systems (e.g., CSV files) into the **SQL Server database** without modifications. This layer acts as a **staging area**, preserving the original data for historical reference and traceability.
 2. **Silver Layer**: The data transformation layer, where raw data undergoes **cleansing, standardization, and normalization** to ensure consistency, accuracy, and integrity, making it suitable for deeper analysis.
@@ -61,18 +65,12 @@ The ETL process is the backbone of this data warehouse project, ensuring seamles
 
 ---
 
-## 🧰 Tools Used
+## 🧰 Project Planning
 
-- **VS Code**  
-  ![VS_code](images/vs_code1.png)  
-  ![VS_code](images/vs_code2.png)
-- **Git** (Version Control)
-- **Notion**  
-  ![Notion](images/Notion1.png)
 - **draw.io** (for ERD and Architecture Diagrams)  
-  ![data_model](images/data_model.drawio.png)
-- **draw.io** Integration Models  
-  ![integration](images/Integration_model.drawio.png)
+  ![data_model](./assets/images/Data_flows.png)
+- **draw.io** Data mart
+  ![integration](./assets/images/Data_mart.png)
 
 ---
 
@@ -187,3 +185,83 @@ JOIN   pg_attribute af ON af.attrelid = confrelid AND af.attnum = ANY(confkey)
 WHERE  contype = 'f'
 AND    pg_class.relnamespace::regnamespace::text = 'gold';
 ```
+
+## Repository Structure
+
+```cmd
+├── assets/                        # Static assets like diagrams or images
+│   └── images/
+│
+├── CSV/                           # All CSV datasets
+│   ├── Gold_csv/                  # Final curated data (Gold Layer)
+│   │   ├── dim_customers.csv
+│   │   ├── dim_products.csv
+│   │   └── fact_sales.csv
+│   └── Ikea_sale/                # Raw synthetic ERP + CRM datasets
+│       ├── customer_preferences.csv
+│       ├── customers.csv
+│       ├── order_items.csv
+│       ├── orders.csv
+│       ├── products.csv
+│       └── sales.csv
+│
+├── License                        # Project license (e.g., MIT)
+├── Procedures/                    # ETL procedures for data loading
+│   ├── bronze_layer_batch.sql
+│   ├── main.sql
+│   └── silver_layer_batch.sql
+│
+├── project/
+│   └── Business analysis/         # Business logic & insight generation
+│       ├── advance_analysis.sql
+│       ├── business_analysis.sql
+│       └── EDA.sql
+│
+├── python/                        # Python automation/data generation
+│   └── main.py
+│
+├── readme.md                      # Project documentation
+├── requirements.txt               # Python package dependencies
+│
+├── scripts/                       # DDL scripts to define schema layers
+│   ├── ddl_bronze_layer.sql
+│   ├── ddl_gold_layer.sql
+│   ├── ddl_silver_layer.sql
+│   ├── keys_constraint.sql
+│   └── main.sql
+│
+├── tests/                         # Placeholder for test SQLs or checks
+│
+├── todo.todo                      # Notes or to-do list
+│
+└── venv/                          # Virtual environment files (excluded from version control)
+```
+
+## 🪪 License
+
+This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and share this project with proper attribution.
+
+## About Me
+
+Hi there! I'm a data science professional with a background in aeronautical engineering, now transitioning into marketing analytics. With a strong foundation in analytical thinking and data-driven decision-making, I've worked on a range of data science projects, including predictive modeling, ETL pipelines, and data warehousing.
+
+Currently, I focus on:
+
+- Building and optimizing ETL pipelines.
+- Working with large-scale databases and performing advanced data analysis.
+- Using tools like SQL, Python, and Tableau to extract actionable insights from data.
+
+I enjoy exploring new technologies in machine learning, AI, and deep learning. My approach is hands-on, and I love learning by doing — whether it's building machine learning models or fine-tuning complex data pipelines.
+
+### Current Projects:
+
+- Developing a predictive model to understand customer behavior.
+- Implementing an advanced data pipeline to optimize data workflows.
+- Working on various marketing analytics projects to drive business decisions.
+
+Feel free to connect or check out my previous projects!
+[Data warehouse project](https://github.com/Saquib-Hazari/sql-data-warehouse-project?tab=readme-ov-file)
+
+## Connect with Me
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/saquib-hazari/) [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/saquib7298) [![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/FJBZBbgC) [![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](<[https://YOUR_WEBSITE.com](https://saquibhazari-portfolio.vercel.app/)>) [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your-email@gmail.com)
