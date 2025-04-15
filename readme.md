@@ -1,14 +1,15 @@
-# 🏠<u>Data Warehouse: Ikea</u>
+# 🏠 <u>Data Warehouse: Ikea</u>
 
-- This repository showcases a comprehensive data warehousing and analytics solution, covering the end-to-end data pipeline—from data ingestion and transformation to business intelligence and insights generation.
+This repository showcases a comprehensive data warehousing and analytics solution, covering the end-to-end data pipeline—from data ingestion and transformation to business intelligence and insights generation.
 
-- Designed as a portfolio project, it demonstrates industry best practices in data engineering, ETL processes, and analytical modeling, enabling efficient data-driven decision-making. This project serves as a blueprint for building a scalable and structured data warehouse architecture that supports business intelligence and reporting.
+Designed as a portfolio project, it demonstrates industry best practices in data engineering, ETL processes, and analytical modeling, enabling efficient data-driven decision-making. This project serves as a blueprint for building a scalable and structured data warehouse architecture that supports business intelligence and reporting.
 
 ---
 
 ## ⚙️ Data Architect
 
-Basic Data Architect use for this Project to build bronze, silver and gold layers.
+Basic Data Architect used for this project to build Bronze, Silver, and Gold layers.
+
 ![Data Architect](images/Architect.png)
 
 1. **Bronze Layer**: The raw data storage layer, where data is ingested directly from source systems (e.g., CSV files) into the **SQL Server database** without modifications. This layer acts as a **staging area**, preserving the original data for historical reference and traceability.
@@ -21,10 +22,10 @@ Basic Data Architect use for this Project to build bronze, silver and gold layer
 
 This project involves:
 
-1. **Data Architecture**: Designing a Modern Data Warehouse using the Medallion Architecture **Bronze**, **Silver**, and **Gold** layers.
-2. **ETL Pipelines**: Extracting, transforming, and loading data from source systems into the warehouse.
-3. **Data Modeling**: Developing fact and dimension tables optimized for analytical queries.
-4. **Analytics & Reporting**: Creating SQL-based reports and dashboards for actionable insights.
+- **Data Architecture**: Designing a Modern Data Warehouse using the Medallion Architecture (**Bronze**, **Silver**, and **Gold** layers).
+- **ETL Pipelines**: Extracting, transforming, and loading data from source systems into the warehouse.
+- **Data Modeling**: Developing fact and dimension tables optimized for analytical queries.
+- **Analytics & Reporting**: Creating SQL-based reports and dashboards for actionable insights.
 
 This repository is an excellent resource for professionals and students looking to showcase expertise in:
 
@@ -39,13 +40,12 @@ This repository is an excellent resource for professionals and students looking 
 
 ## 🚀 Project Requirements
 
-### Building the Data Warehouse (Data Engineering)
+### 🧱 Building the Data Warehouse (Data Engineering)
 
-#### Objective
-
+**Objective**  
 Develop a modern data warehouse using SQL Server to consolidate sales data, enabling analytical reporting and informed decision-making.
 
-#### Specifications
+**Specifications**
 
 - **Data Sources**: Import data from two source systems (ERP and CRM) provided as CSV files.
 - **Data Quality**: Cleanse and resolve data quality issues prior to analysis.
@@ -55,27 +55,30 @@ Develop a modern data warehouse using SQL Server to consolidate sales data, enab
 
 ---
 
-### ⚙️ ETL (Extract Transform and Load)
+## ⚙️ ETL (Extract Transform and Load)
 
-- The ETL process is the backbone of this data warehouse project, ensuring seamless data ingestion, transformation, and integration from multiple sources into a structured analytical model. This project follows a layered Medallion Architecture (Bronze, Silver, Gold) to progressively refine raw data into a business-ready format for reporting and analytics.
+The ETL process is the backbone of this data warehouse project, ensuring seamless data ingestion, transformation, and integration from multiple sources into a structured analytical model. This project follows a layered Medallion Architecture (Bronze, Silver, Gold) to progressively refine raw data into a business-ready format for reporting and analytics.
 
-### ⚙️ Tools used:
+---
 
-- VS code:
-  ![VS_code](images/vs_code1.png)
+## 🧰 Tools Used
+
+- **VS Code**  
+  ![VS_code](images/vs_code1.png)  
   ![VS_code](images/vs_code2.png)
-- Git version control
-- Notion
+- **Git** (Version Control)
+- **Notion**  
   ![Notion](images/Notion1.png)
-- Draw
+- **draw.io** (for ERD and Architecture Diagrams)  
   ![data_model](images/data_model.drawio.png)
-- Integrations:
+- **draw.io** Integration Models  
   ![integration](images/Integration_model.drawio.png)
 
-### 📈 BI: Analytics & Reporting (Data Analysis)
+---
 
-#### Objective
+## 📈 BI: Analytics & Reporting (Data Analysis)
 
+**Objective**  
 Develop SQL-based analytics to deliver detailed insights into:
 
 - **Customer Behavior**
@@ -84,59 +87,103 @@ Develop SQL-based analytics to deliver detailed insights into:
 
 These insights empower stakeholders with key business metrics, enabling strategic decision-making.
 
-For more details, refer to the project documentation.
+---
+
+## 🔎 Exploratory Data Analysis (EDA)
+
+This section includes powerful SQL queries to extract actionable insights from the **Gold Layer** tables: `dim_customers`, `dim_products`, and `fact_sales`.
 
 ---
 
-## 📂 Repository Structure
+### 👤 Customer Insights
 
-```
-data-warehouse-project/
-│
-├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
-│   ├── source_crm/                     # CRM data sources
-│   ├── source_erp/                     # ERP data sources
-│
-├── docs/                               # Project documentation and architecture details
-│   ├── data_catalog.md                 # Catalog of datasets, including field descriptions and metadata
-│
-├── images/                             # Visual representation of project components
-│   ├── Architecture.drawio.png         # Data architecture diagram
-│   ├── Integration_model.drawio.png    # Integration model representation
-│   ├── data_model.drawio.png           # Data model schema diagram
-│
-├── scripts/                            # SQL scripts for ETL and transformations
-│   ├── ddl_bronze_layer.sql            # Schema definition for Bronze Layer
-│   ├── ddl_silver_layer.sql            # Schema definition for Silver Layer
-│   ├── ddl_gold_layer.sql              # Schema definition for Gold Layer
-│   └── main.sql                         # Main execution script for DDLs
-│
-├── Procedures/                         # Stored procedures for batch processing
-│   ├── bronze_layer_batch.sql          # Batch processing for Bronze Layer
-│   ├── bronze_layer_truncate.sql       # Truncate script for Bronze Layer
-│   ├── silver_layer_batch.sql          # Batch processing for Silver Layer
-│
-├── Joins/                              # SQL scripts for table joins
-│   ├── join_silver_customer.sql        # Joins related to Silver Customer table
-│   ├── test.sql                         # Test join queries
-│
-├── tests/                              # Test scripts and quality checks
-│   └── test.sql                        # SQL test cases
-│
-├── README.md                           # Project overview and instructions
-├── LICENSE                             # License information for the repository
-├── .gitignore                          # Files and directories to be ignored by Git
-├── requirements.txt                    # Dependencies and requirements for the project
+**1. Schema Check**
+
+```sql
+
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'gold' AND table_type = 'BASE TABLE';
+
+SELECT
+  column_name,
+  data_type,
+  is_nullable
+FROM information_schema.columns
+WHERE table_schema = 'gold'
+  AND table_name = 'your_table_name';
+
+SELECT 'dim_customers' AS table_name, COUNT(*) FROM gold.dim_customers
+UNION ALL
+SELECT 'dim_products', COUNT(*) FROM gold.dim_products
+UNION ALL
+SELECT 'fact_sales', COUNT(*) FROM gold.fact_sales;
 ```
 
----
+**2. Gold.dim_customers Table Check**
 
-### 🪪 License
+```sql
+SELECT gender, COUNT(*) FROM gold.dim_customers GROUP BY gender;
 
-This project is licensed under the [MIT License](LICENSE). You are free to use, modify, and share this project with proper attribution.
+SELECT DATE_PART('year', AGE(date_of_birth)) AS age, COUNT(*)
+FROM gold.dim_customers
+GROUP BY age ORDER BY age;
 
-### 👋 About Me
+SELECT preferred_store, COUNT(*)
+FROM gold.dim_customers
+GROUP BY preferred_store
+ORDER BY COUNT(*) DESC;
+```
 
-Hi there! I'm Saquib Hazari passionate Data Analyst and enthusiast. Feel free to reach out to me from the blow links.
+**3. Gold.dim_products Table Check**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/saquib-hazari/) [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/saquib7298) [![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/FJBZBbgC) [![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](<[https://YOUR_WEBSITE.com](https://saquibhazari-portfolio.vercel.app/)>)
+```sql
+SELECT category, COUNT(*)
+FROM gold.dim_products
+GROUP BY category ORDER BY COUNT(*) DESC;
+
+SELECT defect_flag, COUNT(*)
+FROM gold.dim_products
+GROUP BY defect_flag;
+
+SELECT supplier_name, COUNT(*)
+FROM gold.dim_products
+GROUP BY supplier_name
+ORDER BY COUNT(*) DESC
+LIMIT 10;
+```
+
+**4. Gold.fact_sales Table Check**
+
+```sql
+SELECT DATE_TRUNC('month', order_date) AS order_month, COUNT(*)
+FROM gold.fact_sales
+GROUP BY order_month
+ORDER BY order_month;
+
+SELECT
+  AVG(ship_date - order_date) AS avg_shipping_days,
+  MAX(ship_date - order_date) AS max_shipping_days
+FROM gold.fact_sales;
+
+SELECT order_status, SUM(net_sales) AS total_sales
+FROM gold.fact_sales
+GROUP BY order_status;
+```
+
+**5. Health Check**
+
+```sql
+SELECT
+    conname AS constraint_name,
+    conrelid::regclass AS table_from,
+    a.attname AS column_from,
+    confrelid::regclass AS table_to,
+    af.attname AS column_to
+FROM   pg_constraint
+JOIN   pg_class ON conrelid = pg_class.oid
+JOIN   pg_attribute a ON a.attrelid = conrelid AND a.attnum = ANY(conkey)
+JOIN   pg_attribute af ON af.attrelid = confrelid AND af.attnum = ANY(confkey)
+WHERE  contype = 'f'
+AND    pg_class.relnamespace::regnamespace::text = 'gold';
+```
