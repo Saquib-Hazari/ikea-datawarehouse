@@ -1,3 +1,19 @@
+/* Dropping and Creating tables to import all the data to the database.
+==============================================================
+DROPPING AND CREATING TABLES (DDL) bronze layer
+==============================================================
+1- Creating the schema in the database named bronze.
+2- Dropping the tables if exists and creating the tables.
+3- Inserting the raw columns to the table with data type TEXT.
+4- Copying the file form the csv with Decimeter ',';
+ex:   COPY bronze.products
+        FROM '/Users/saquibhazari/DEVELOPERS/ikea_sales_database/CSV/Ikea_sale/products.csv'
+        WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
+        RAISE NOTICE '✅ Loaded bronze.products';
+5- Batch processing.
+
+*/
+
 -- Extracting raw data to the database
 CREATE SCHEMA IF NOT EXISTS bronze;
 DROP TABLE IF EXISTS bronze.customer;

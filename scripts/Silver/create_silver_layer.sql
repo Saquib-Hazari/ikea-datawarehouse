@@ -1,3 +1,14 @@
+/* Dropping and Creating tables to import all the data to the database.
+==============================================================
+DROPPING AND CREATING TABLES (DDL) Silver layer
+==============================================================
+1- Creating the schema in the database named silver.
+2- Dropping the tables if exists and creating the tables.
+3- Inserting the raw columns to the silver layer table with correct data type from bronze layer.
+4- Data Cleaning and inserting into the tables with correct Data type.
+5- Batch processing.
+
+*/
 -- Creating the tables for the silver layer
 CREATE SCHEMA IF NOT EXISTS silver;
 
@@ -14,7 +25,7 @@ CREATE TABLE silver.customers(
   sub_category TEXT,
   dwh_created_date TIMESTAMP DEFAULT NOW(),
   dwh_updated_date TIMESTAMP DEFAULT NOW()
-)
+);
 
 DROP TABLE IF EXISTS silver.customer_preferences;
 CREATE TABLE silver.customer_preferences(
@@ -26,7 +37,7 @@ CREATE TABLE silver.customer_preferences(
   newsletter_subscribed VARCHAR(10),
   dwh_created_date TIMESTAMP DEFAULT NOW(),
   dwh_updated_date TIMESTAMP DEFAULT NOW()
-)
+);
 
 DROP TABLE IF EXISTS silver.order_items;
 
@@ -51,7 +62,7 @@ CREATE TABLE silver.orders(
   ship_date DATE,
   due_date DATE,
   order_status TEXT,
-   dwh_created_date TIMESTAMP DEFAULT NOW(),
+  dwh_created_date TIMESTAMP DEFAULT NOW(),
   dwh_updated_date TIMESTAMP DEFAULT NOW()
 );
 
@@ -65,7 +76,7 @@ CREATE TABLE silver.products(
   defect_flag TEXT,
   dwh_created_date TIMESTAMP DEFAULT NOW(),
   dwh_updated_date TIMESTAMP DEFAULT NOW()
-)
+);
 
 
 DROP TABLE IF EXISTS silver.sales;

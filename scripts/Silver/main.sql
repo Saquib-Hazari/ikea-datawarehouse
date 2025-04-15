@@ -1,3 +1,4 @@
+/* Checking data tables and verification */
 SELECT 
   order_id,
   customer_id,

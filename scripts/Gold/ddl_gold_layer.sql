@@ -1,6 +1,13 @@
---Creating the gold layer ddl
--- creating dim_customers table
--- DIMENSION: dim_customers
+-- ===============================================
+-- 🏗️ GOLD LAYER CREATION (STAR SCHEMA DESIGN)
+-- ===============================================
+-- This script creates the Gold Layer with:
+-- • dim_customers: Enriched customer info with surrogate key.
+-- • dim_products: Product master data with surrogate key.
+-- • fact_sales: Sales transactions joined with customer & product dimensions.
+-- • Surrogate keys generated using ROW_NUMBER().
+-- • Enables efficient joins and analytics in BI tools.
+-- ===============================================
 CREATE SCHEMA IF NOT EXISTS gold;
 DROP TABLE IF EXISTS gold.dim_customers;
 CREATE TABLE gold.dim_customers AS

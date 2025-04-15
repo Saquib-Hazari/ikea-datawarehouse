@@ -1,3 +1,16 @@
+# ===================================================
+# 📤 EXTRACT SAMPLE GOLD LAYER DATA TO CSV FILES
+# ===================================================
+# • Loads environment variables for DB connection.
+# • Connects to PostgreSQL using psycopg2.
+# • Executes SELECT * queries (LIMIT 5000) on:
+#     - gold.dim_customers
+#     - gold.dim_products
+#     - gold.fact_sales
+# • Exports each result to a CSV file using pandas.
+# • Closes the database connection after export.
+# ===================================================
+
 import pandas as pd
 import numpy as np
 import psycopg2
