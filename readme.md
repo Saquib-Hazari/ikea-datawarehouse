@@ -244,7 +244,7 @@ This project is licensed under the [MIT License](LICENSE). You are free to use, 
 
 ## About Me
 
-Hi there! I'm a data science professional with a background in aeronautical engineering, now transitioning into marketing analytics. With a strong foundation in analytical thinking and data-driven decision-making, I've worked on a range of data science projects, including predictive modeling, ETL pipelines, and data warehousing.
+Hi there! I'm Saquib Hazari. With a strong foundation in analytical thinking and data-driven decision-making, I've worked on a range of data science projects, including predictive modeling, ETL pipelines, and data warehousing.
 
 Currently, I focus on:
 
