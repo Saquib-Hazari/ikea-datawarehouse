@@ -79,8 +79,9 @@ The ETL process is the backbone of this data warehouse project, ensuring seamles
 **Objective**  
 Develop SQL-based analytics to deliver detailed insights into:
 
-- **Customer Behavior**
-- **Product Performance**
+- **Total Order**
+- **Total Profits**
+- **Region Sales**
 - **Sales Trends**
   ![Ikea Dashboard](./assets/images/ikea_dashboard.jpg)
 
