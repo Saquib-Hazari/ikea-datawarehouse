@@ -82,6 +82,7 @@ Develop SQL-based analytics to deliver detailed insights into:
 - **Customer Behavior**
 - **Product Performance**
 - **Sales Trends**
+  ![Ikea Dashboard](./assets/images/ikea_dashboard.jpg)
 
 These insights empower stakeholders with key business metrics, enabling strategic decision-making.
 
