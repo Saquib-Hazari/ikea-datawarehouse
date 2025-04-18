@@ -88,11 +88,11 @@ Develop SQL-based analytics to deliver detailed insights into:
 These insights empower stakeholders with key business metrics, enabling strategic decision-making.
 ## ➡️ Key Findings
 📊 Insights Delivered
-• Monthly Orders: 5,000+
-• Total Sales: $2.93M/year
-• Avg. Monthly Order Value: $4,906
-• Top Customer States: Maharashtra, Telangana, Tamil Nadu
-• High Demand Products: Beds, Lamps, Office Furniture, Living Room Sets
+- Monthly Orders: 5,000+
+- Total Sales: $2.93M/year
+- Avg. Monthly Order Value: $4,906
+- Top Customer States: Maharashtra, Telangana, Tamil Nadu
+- High Demand Products: Beds, Lamps, Office Furniture, Living Room Sets
 
 ---
 
